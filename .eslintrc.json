@@ -1,0 +1,18 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true // Added "node" environment for Node.js
+    },
+    "extends": [
+      "standard-with-typescript"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2021, // Updated to a specific ECMAScript version
+      "sourceType": "module",
+      "project": "./tsconfig.json" // Added "project" property pointing to your tsconfig.json file
+    },
+    "rules": {
+      // Add custom rules or modify existing rules as per your preference
+    }
+  }
