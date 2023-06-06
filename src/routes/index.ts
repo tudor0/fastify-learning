@@ -2,6 +2,7 @@ import { type FastifyInstance } from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import register from "./register";
 import login from "./login";
+import posts from "./posts";
 
 export default async function router(fastify: FastifyInstance): Promise<void> {
   const localInstance = fastify.withTypeProvider<TypeBoxTypeProvider>();
@@ -24,5 +25,9 @@ export default async function router(fastify: FastifyInstance): Promise<void> {
   });
   void fastify.register(login, {
     prefix: "/login"
+  });
+
+  void fastify.register(posts, {
+    prefix: "/posts"
   });
 }

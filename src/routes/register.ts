@@ -83,10 +83,13 @@ const register = async (fastify: FastifyInstance): Promise<void> => {
         );
 
         reply.code(200).send({
-          userName,
-          email,
-          firstName,
-          lastName,
+          user: {
+            userName,
+            email,
+            firstName,
+            lastName,
+            id: rows3[0].id
+          },
           token
         });
       } catch (err) {

@@ -3,7 +3,7 @@ import { FastifyInstance } from "fastify";
 import { compareSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "../constants";
-import { isJwtExpired } from "../utils/jwt";
+// import { isJwtExpired } from "../utils/jwt";
 
 const login = async (fastify: FastifyInstance) => {
   const localInstance = fastify.withTypeProvider<TypeBoxTypeProvider>();
@@ -13,7 +13,7 @@ const login = async (fastify: FastifyInstance) => {
     {
       schema: {
         body: Type.Object({
-          email: Type.String({ minLength: 3, maxLength: 20 }),
+          email: Type.String({ minLength: 3, maxLength: 40 }),
           password: Type.String({ minLength: 8, maxLength: 20 })
         }),
         required: ["userName", "password"],
@@ -53,9 +53,18 @@ const login = async (fastify: FastifyInstance) => {
         }
       );
 
+      const { firstName, lastName, userName } = rows[0];
+
       reply.code(200).send({
         message: "Login successful",
-        token
+        token,
+        user: {
+          firstName,
+          lastName,
+          userName,
+          email,
+          id: rows[0].id
+        }
       });
     }
   );
